@@ -1,0 +1,13 @@
+# Exclude SASS files.
+.sass-cache
+
+# Exclude CSS debug files.
+*.css.map
+
+# Ignore PHPStorm files
+.idea/
+
+# Ignore OS backup and unnecessary config files.
+*~
+.DS_Store
+

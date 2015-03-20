@@ -1,0 +1,25 @@
+// Import Init.
+@import "init";
+
+.social-links {
+  li {
+    padding: {
+      bottom: 5px;
+      top: 5px;
+    }
+  }
+
+  a {
+    display: inline-block;
+    height: social-icon-height(facebook);
+    line-height: social-icon-height(facebook);
+    padding-left: social-icon-width(facebook) + 15px;
+  }
+
+  @debug 'hello world';
+
+  a[href*="facebook"]    {@include social-icon('facebook');}
+  a[href*="twitter"]     {@include social-icon('twitter', $options: (offset-y: 10px));}
+//  a[href*="twitter"]     {@include social-icon('twitter');}
+  a[href*="plus.google"] {@include social-icon('google-plus');}
+}

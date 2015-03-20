@@ -1,0 +1,43 @@
+.social-links li {
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+.social-links a {
+  display: inline-block;
+  height: 32px;
+  line-height: 32px;
+  padding-left: 47px;
+}
+.social-links a[href*="facebook"] {
+  background-image: url('../images/generated/icons-s4fe23f3ead.png');
+  background-position: 0 -84px;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (-o-min-device-pixel-ratio: 3 / 2), (min--moz-device-pixel-ratio: 2), (min-device-pixel-ratio: 2), (min-resolution: 144dppx) {
+  .social-links a[href*="facebook"] {
+    background-size: 32px 194px;
+    background-position: 0 0;
+  }
+}
+.social-links a[href*="twitter"] {
+  background-image: url('../images/generated/icons-s4fe23f3ead.png');
+  background-position: 0 -346px;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (-o-min-device-pixel-ratio: 3 / 2), (min--moz-device-pixel-ratio: 2), (min-device-pixel-ratio: 2), (min-resolution: 144dppx) {
+  .social-links a[href*="twitter"] {
+    background-size: 32px 194px;
+    background-position: 0 -126px;
+  }
+}
+.social-links a[href*="plus.google"] {
+  background-image: url('../images/generated/icons-s4fe23f3ead.png');
+  background-position: 0 -220px;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (-o-min-device-pixel-ratio: 3 / 2), (min--moz-device-pixel-ratio: 2), (min-device-pixel-ratio: 2), (min-resolution: 144dppx) {
+  .social-links a[href*="plus.google"] {
+    background-size: 32px 194px;
+    background-position: 0 -68px;
+  }
+}

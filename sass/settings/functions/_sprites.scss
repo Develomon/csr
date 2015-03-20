@@ -1,0 +1,24 @@
+//
+// Sprite functions.
+//
+
+// Icons.
+// ---------------------
+
+// Get icon height.
+@function sprite-icon-height($sprite-map, $file-name) {
+  @return image-height(sprite-file($sprite-map, $file-name));
+}
+// Get icon width.
+@function sprite-icon-width($sprite-map, $file-name) {
+  @return image-width(sprite-file($sprite-map, $file-name));
+}
+
+// Get social icon height.
+@function social-icon-height($file-name) {
+  @return sprite-icon-height($social-icons, $file-name);
+}
+// Get social icon width.
+@function social-icon-width($file-name) {
+  @return sprite-icon-width($social-icons, $file-name);
+}

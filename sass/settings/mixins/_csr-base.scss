@@ -1,0 +1,68 @@
+
+//
+// Compass Sprites Retina - base mixin.
+//
+// $array: (
+//   map:              // [object]   Sprite map variable.          (required)
+//   name:             // [string]   Icon (file) name.             (required)
+//   retina:           // [boolean]  Retina icons are supported?   (required for retina support)
+//   retina-suffix:    // [string]   Suffix added to retina icons. (required for retina support)
+// );
+//
+// Read more about Compass helper functions:
+// http://compass-style.org/reference/compass/helpers/sprites/
+//
+@mixin csr($array: (
+  map: '',
+  name: '',
+  retina: false,
+  retina-suffix: '-2x',
+  offset-y: 0,
+  offset-x: 0
+)) {
+
+  // Local variables.
+  $csr-map:             map-get($array, map);
+  $csr-retina:          map-get($array, retina);
+  $csr-retina-suffix:   map-get($array, retina-suffix);
+  $csr-name:            map-get($array, name);
+  $csr-name-retina: #{$csr-name}#{$csr-retina-suffix};
+  $csr-offset-x:        map-get($array, offset-x);
+  $csr-offset-y:        map-get($array, offset-y);
+
+  background-image: sprite-url($csr-map);
+  background-position: sprite-position($csr-map, $csr-name, $csr-offset-x, $csr-offset-y);
+  background-repeat: no-repeat;
+
+  @if $csr-retina {
+    @media (-webkit-min-device-pixel-ratio: 2),
+    (-o-min-device-pixel-ratio: 3/2),
+    (min--moz-device-pixel-ratio: 2),
+    (min-device-pixel-ratio: 2), (min-resolution: 144dppx) {
+      background-size: (image-width(sprite-path($csr-map)) / 2) (image-height(sprite-path($csr-map)) / 2);
+      background-position: round(nth(sprite-position($csr-map, $csr-name-retina, ($csr-offset-x * 2), ($csr-offset-y * 2)), 1) / 2) round(nth(sprite-position($csr-map, $csr-name-retina, ($csr-offset-x * 2), ($csr-offset-y * 2)), 2) / 2);
+    }
+  }
+}
+
+// Mixin for social network icons.
+@mixin social-icon($file-name, $options: ()) {
+  // Set mixin defaults.
+  $default-options: (
+    map: $social-icons,
+    name: $file-name,
+    retina: true,
+    retina-suffix: '-2x'
+  );
+
+  // Do not change anything below.
+  $array: map-merge((
+    offset-x: 0,
+    offset-y: 0
+  ), $options);
+
+  // Merge default options at the end to avoid overriding default options.
+  $array: map_merge($array, $default-options);
+
+  @include csr($array);
+}
