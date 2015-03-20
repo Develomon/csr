@@ -1,0 +1,26 @@
+// Mixin for social network icons.
+@mixin social-icon($file-name, $options: ()) {
+  // Set mixin defaults.
+  $default-options: (
+    map: $social-icons,
+    name: $file-name,
+    retina: true,
+    retina-suffix: '-2x'
+  );
+
+  // Do not change anything below.
+  $array: map-merge((
+    offset-x: 0,
+    offset-y: 0
+  ), $options);
+
+  // Merge default options at the end to avoid overriding default options.
+  $array: map_merge($array, $default-options);
+
+  @if (mixin-exists(csr)) {
+    @include csr($array);
+  }
+  @else {
+    @warn "Mixin 'csr' doesn't exist!";
+  }
+}

@@ -9,7 +9,7 @@
   padding-left: 47px;
 }
 .social-links a[href*="facebook"] {
-  background-image: url('../images/generated/icons-s4fe23f3ead.png');
+  background-image: url('../images/generated/icons/social-sc6542c989f.png');
   background-position: 0 -84px;
   background-repeat: no-repeat;
 }
@@ -20,7 +20,7 @@
   }
 }
 .social-links a[href*="twitter"] {
-  background-image: url('../images/generated/icons-s4fe23f3ead.png');
+  background-image: url('../images/generated/icons/social-sc6542c989f.png');
   background-position: 0 -346px;
   background-repeat: no-repeat;
 }
@@ -31,7 +31,7 @@
   }
 }
 .social-links a[href*="plus.google"] {
-  background-image: url('../images/generated/icons-s4fe23f3ead.png');
+  background-image: url('../images/generated/icons/social-sc6542c989f.png');
   background-position: 0 -220px;
   background-repeat: no-repeat;
 }

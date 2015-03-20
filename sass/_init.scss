@@ -7,12 +7,16 @@
 
 // Import variables.
 // -----------------
-@import "settings/variables/sprites";
+//@import "settings/variables/[filename]";
 
 // Import functions.
 // -----------------
-@import "settings/functions/sprites";
+//@import "settings/functions/[filename]";
 
 // Import mixins.
 // --------------
-@import "settings/mixins/csr-base";
+@import "settings/mixins/csr";
+
+// Import components.
+// --------------
+@import "components/social-icons/social-icons";

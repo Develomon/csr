@@ -1,25 +1,19 @@
-
 //
 // Compass Sprites Retina - base mixin.
 //
 // $array: (
-//   map:              // [object]   Sprite map variable.          (required)
-//   name:             // [string]   Icon (file) name.             (required)
-//   retina:           // [boolean]  Retina icons are supported?   (required for retina support)
-//   retina-suffix:    // [string]   Suffix added to retina icons. (required for retina support)
+//   map: '',                // [object]   Sprite map variable.          (required)
+//   name: '',               // [string]   Icon (file) name.             (required)
+//   retina: true,           // [boolean]  Retina icons are supported?   (required for retina support)
+//   retina-suffix: false,   // [string]   Suffix added to retina icons. (required for retina support)
+//   offset-x: 0,            // [integer]  Icon distance from left.
+//   offset-y: 0             // [integer]  Icon distance from top.
 // );
 //
 // Read more about Compass helper functions:
 // http://compass-style.org/reference/compass/helpers/sprites/
 //
-@mixin csr($array: (
-  map: '',
-  name: '',
-  retina: false,
-  retina-suffix: '-2x',
-  offset-y: 0,
-  offset-x: 0
-)) {
+@mixin csr($array: ()) {
 
   // Local variables.
   $csr-map:             map-get($array, map);
@@ -43,26 +37,4 @@
       background-position: round(nth(sprite-position($csr-map, $csr-name-retina, ($csr-offset-x * 2), ($csr-offset-y * 2)), 1) / 2) round(nth(sprite-position($csr-map, $csr-name-retina, ($csr-offset-x * 2), ($csr-offset-y * 2)), 2) / 2);
     }
   }
-}
-
-// Mixin for social network icons.
-@mixin social-icon($file-name, $options: ()) {
-  // Set mixin defaults.
-  $default-options: (
-    map: $social-icons,
-    name: $file-name,
-    retina: true,
-    retina-suffix: '-2x'
-  );
-
-  // Do not change anything below.
-  $array: map-merge((
-    offset-x: 0,
-    offset-y: 0
-  ), $options);
-
-  // Merge default options at the end to avoid overriding default options.
-  $array: map_merge($array, $default-options);
-
-  @include csr($array);
 }
