@@ -1,19 +1,38 @@
-//
-// Compass Sprites Retina - base mixin.
-//
-// $array: (
-//   map: '',                // [object]   Sprite map variable.          (required)
-//   name: '',               // [string]   Icon (file) name.             (required)
-//   retina: true,           // [boolean]  Retina icons are supported?   (required for retina support)
-//   retina-suffix: false,   // [string]   Suffix added to retina icons. (required for retina support)
-//   offset-x: 0,            // [integer]  Icon distance from left.
-//   offset-y: 0             // [integer]  Icon distance from top.
-// );
-//
-// Read more about Compass helper functions:
-// http://compass-style.org/reference/compass/helpers/sprites/
-//
-@mixin csr($array: ()) {
+////
+/// CSR - Compass Sprites Retina.
+/// @group Sprites
+/// @author Dragan Eror
+////
+
+///
+/// Compass sprites retina.
+/// @param {Object} $options [()] - Mixin options object.
+/// @example
+///   $options: (
+///     map: '',
+///     name: '',
+///     retina: true,
+///     retina-suffix: '-2x',
+///     offset-x: 0,
+///     offset-y: 0
+///   );
+/// @link http://compass-style.org/reference/compass/helpers/sprites/
+///
+@mixin csr($options: ()) {
+
+  // Default options.
+  $default-options: (
+    map: '',
+    name: '',
+    retina: true,
+    retina-suffix: '-2x',
+    offset-x: 0,
+    offset-y: 0
+  );
+
+  // Merge default options and options in one object.
+  // If there are keys set in options, default options will be overridden.
+  $array: map_merge($default-options, $options);
 
   // Local variables.
   $csr-map:             map-get($array, map);
@@ -24,10 +43,13 @@
   $csr-offset-x:        map-get($array, offset-x);
   $csr-offset-y:        map-get($array, offset-y);
 
+  // Styles.
   background-image: sprite-url($csr-map);
   background-position: sprite-position($csr-map, $csr-name, $csr-offset-x, $csr-offset-y);
   background-repeat: no-repeat;
+  background-size: auto;
 
+  // Retina styles.
   @if $csr-retina {
     @media (-webkit-min-device-pixel-ratio: 2),
     (-o-min-device-pixel-ratio: 3/2),
@@ -37,4 +59,25 @@
       background-position: round(nth(sprite-position($csr-map, $csr-name-retina, ($csr-offset-x * 2), ($csr-offset-y * 2)), 1) / 2) round(nth(sprite-position($csr-map, $csr-name-retina, ($csr-offset-x * 2), ($csr-offset-y * 2)), 2) / 2);
     }
   }
+}
+
+///
+/// Compass Sprites Retina - Base mixin.
+/// @param {Object} $map - Map object variable.
+/// @param {String} $file-name - Icon file name.
+/// @param {Object} $options [()] - Optional parameters.
+/// @see {mixin} csr
+///
+@mixin csr-base($map, $file-name, $options: ()) {
+
+  // Set mixin defaults.
+  $default-options: (
+    map: $map,
+    name: $file-name
+  );
+
+  // Merge default options at after options to avoid overriding default options.
+  $array: map_merge($options, $default-options);
+
+  @include csr($array);
 }

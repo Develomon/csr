@@ -1,26 +1,24 @@
-// Mixin for social network icons.
+////
+/// Mixin for social network icons.
+/// Below are examples how to use 'csr-base' mixin.
+////
+
+///
+/// Social icons sprite.
+/// @param {String} $file-name - Icon file name.
+/// @param {Object} $options - Optional object options.
+/// @see {mixin} csr-base
+///
 @mixin social-icon($file-name, $options: ()) {
-  // Set mixin defaults.
-  $default-options: (
-    map: $social-icons,
-    name: $file-name,
-    retina: true,
-    retina-suffix: '-2x'
-  );
+  @include csr-base($social-icons, $file-name, $options);
+}
 
-  // Do not change anything below.
-  $array: map-merge((
-    offset-x: 0,
-    offset-y: 0
-  ), $options);
-
-  // Merge default options at the end to avoid overriding default options.
-  $array: map_merge($array, $default-options);
-
-  @if (mixin-exists(csr)) {
-    @include csr($array);
-  }
-  @else {
-    @warn "Mixin 'csr' doesn't exist!";
-  }
+///
+/// Social icons sprite.
+/// @param {String} $file-name - Icon file name.
+/// @param {Object} $options - Optional object options.
+/// @see {mixin} csr-base
+///
+@mixin social-icon-nonretina($file-name, $options: (retina: false)) {
+  @include csr-base($social-icons, $file-name, $options);
 }

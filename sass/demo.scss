@@ -1,0 +1,32 @@
+// Import Init.
+// ------------
+@import "init";
+
+html {
+  font: {
+    family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
+    size: 16px;
+  }
+}
+body {
+  font-size: 0.875em;
+  padding: 50px;
+}
+a {
+  color: royalblue;
+  text-decoration: none;
+
+  &:hover {
+    -webkit-filter: opacity(0.8);
+    -moz-filter: opacity(0.8);
+    -o-filter: opacity(0.8);
+    -ms-filter: opacity(0.8);
+    filter: opacity(0.8);
+  }
+}
+h2 {
+  margin: {
+    bottom: 1em;
+    top: 2em;
+  }
+}

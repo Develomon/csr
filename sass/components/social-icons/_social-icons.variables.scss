@@ -1,7 +1,8 @@
-//
-// Sprites.
-//
+////
+/// Sprites.
+////
 
-// Social network icons.
-// ---------------------
-$social-icons: sprite-map("icons/social/*.png", $spacing: 20px) !default;
+///
+/// Social networks icons sprite.
+///
+$social-icons: sprite-map("icons/social/*.png", $spacing: 20px, $sort-by: width) !default;

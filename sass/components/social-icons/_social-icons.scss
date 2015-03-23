@@ -8,13 +8,24 @@
 // Component styles.
 // =====================================================
 
-.social-links {
+%social-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
   li {
     padding: {
       bottom: 5px;
       top: 5px;
     }
   }
+}
+
+/**
+ * SOCIAL ICONS.
+ */
+[class*="social-links"] {
+  @extend %social-links;
 
   a {
     display: inline-block;
@@ -24,7 +35,19 @@
   }
 
   a[href*="facebook"]    {@include social-icon('facebook');}
-  a[href*="twitter"]     {@include social-icon('twitter', $options: (offset-y: 10px));}
-  //  a[href*="twitter"]     {@include social-icon('twitter');}
+  a[href*="twitter"]     {@include social-icon('twitter');}
   a[href*="plus.google"] {@include social-icon('google-plus');}
+}
+
+/**
+ * SOCIAL ICONS - NONRETINA.
+ */
+.social-links--nonretina {
+  a[href*="facebook"]    {@include social-icon-nonretina('facebook');}
+  a[href*="twitter"]     {@include social-icon-nonretina('twitter');}
+  a[href*="plus.google"] {@include social-icon-nonretina('google-plus');}
+}
+
+.social-links--offset-y {
+  a[href*="twitter"]     {@include social-icon('twitter', $options: (offset-y: 10px));}
 }

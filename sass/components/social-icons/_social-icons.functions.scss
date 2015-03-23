@@ -1,24 +1,42 @@
-//
-// Sprite functions.
-//
+////
+/// Sprite helper functions.
+/// @group Helper
+////
 
-// Icons.
-// ---------------------
-
-// Get icon height.
+///
+/// Get icon height.
+/// @param {Object} $sprite-map - Sprite object variable.
+/// @param {String} $filename - Icon file name.
+/// @return {String} - Returns icon height from sprite.
+///
 @function sprite-icon-height($sprite-map, $file-name) {
   @return image-height(sprite-file($sprite-map, $file-name));
 }
-// Get icon width.
+
+///
+/// Get icon width.
+/// @param {Object} $sprite-map - Sprite object variable.
+/// @param {String} $filename - Icon file name.
+/// @return {String} - Returns icon width from sprite.
+///
 @function sprite-icon-width($sprite-map, $file-name) {
   @return image-width(sprite-file($sprite-map, $file-name));
 }
 
-// Get social icon height.
+///
+/// Get social icon height.
+/// @param {String} $filename - Icon file name.
+/// @return {String} - Returns icon height from social-icon sprite.
+///
 @function social-icon-height($file-name) {
   @return sprite-icon-height($social-icons, $file-name);
 }
-// Get social icon width.
+
+///
+/// Get social icon width.
+/// @param {String} $filename - Icon file name.
+/// @return {String} - Returns icon width from social-icon sprite.
+///
 @function social-icon-width($file-name) {
   @return sprite-icon-width($social-icons, $file-name);
 }
