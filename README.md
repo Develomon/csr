@@ -17,14 +17,33 @@ First you need to download csr mixin (_csr.scss) to your project mixins director
 
 ### Basic usage
 
-1. Create Compass map variable with the name of your sprite, and pass needed arguments.<br> 
-Example:
-   
-SCSS:
-```scss
-///
-/// Social networks icons sprite.
-///
-$social-icons: sprite-map("icons/social/*.png", $spacing: 20px, $sort-by: width) !default;
-```
-   
+1. Put social network icons into:
+  ```
+  | images/
+  |-- icons/
+      |-- social/
+          |-- facebook.png
+          |-- facebook-2x.png
+          |-- twitter.png
+          |-- twitter-2x.png
+          |-- google-plus.png
+          |-- google-plus-2x.png
+  ```
+2. Create Compass map variable with the name of your sprite, and pass needed arguments.<br> 
+  Example:
+  
+  SCSS:
+  ```scss
+  ///
+  /// Social networks icons sprite.
+  ///
+  $social-icons: sprite-map("icons/social/*.png", $spacing: 20px, $sort-by: width) !default;
+  ```
+  
+  *First time when you call csr mixin with `$social-icons` map, sprite image will be generated into*
+  ```
+  | images/
+  |-- generated/
+      |-- icons/
+          |-- social-[attached_with_some_string].png
+  ```
