@@ -17,7 +17,7 @@ First you need to download csr mixin (_csr.scss) to your project mixins director
 
 ### Basic usage
 
-1. Put social network icons into:
+1. Put social network icons into
   ```
   | images/
   |-- icons/
@@ -29,6 +29,7 @@ First you need to download csr mixin (_csr.scss) to your project mixins director
           |-- google-plus.png
           |-- google-plus-2x.png
   ```
+
 2. Create Compass map variable with the name of your sprite, and pass needed arguments.<br> 
   Example:
   
