@@ -75,6 +75,22 @@ First you need to download csr mixin (_csr.scss) to your project mixins director
   }
   ```
   
+  CSS:
+  ```css
+  .social-links a[href*="facebook"] {
+    background-image: url('../images/generated/icons/social-scd077450f9.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: auto;
+  }
+  @media (-webkit-min-device-pixel-ratio: 2), (-o-min-device-pixel-ratio: 3 / 2), (min--moz-device-pixel-ratio: 2), (min-device-pixel-ratio: 2), (min-resolution: 144dppx) {
+    .social-links a[href*="facebook"] {
+      background-size: 32px 194px;
+      background-position: 0 -78px;
+    }
+  }
+  ```
+  
   HTML
   ```html
   <ul class="social-icons">
@@ -82,3 +98,4 @@ First you need to download csr mixin (_csr.scss) to your project mixins director
   <ul>
   ```
   
+  _NOTE:_ CSR is mixin for basic usage, it is used to set background image url, position, repeat and size properties for background image. All other properties (like width or height) you have to set on your own (directly in styles or your helper mixin).
