@@ -52,6 +52,7 @@ First you need to download csr mixin (_csr.scss) to your project mixins director
 3. Create your helper mixin which you will use later with `$social-icons` sprite map variable.
   Example:
   
+  SCSS:
   ```scss
   ///
   /// Social icons sprite.
@@ -62,5 +63,22 @@ First you need to download csr mixin (_csr.scss) to your project mixins director
   @mixin social-icon($file-name, $options: ()) {
     @include csr-base($social-icons, $file-name, $options);
   }
+  ```
+
+4. Style link with background image from sprite.
+  Example:
+  
+  SCSS:
+  ```scss
+  .social-icons {
+    a[href*="facebook"] {@include social-icon('facebook');
+  }
+  ```
+  
+  HTML
+  ```html
+  <ul class="social-icons">
+    <li><a href="http://facebook.com/">Facebook</a></li>
+  <ul>
   ```
   
