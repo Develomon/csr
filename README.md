@@ -99,3 +99,7 @@ First you need to download csr mixin (_csr.scss) to your project mixins director
   ```
   
   _NOTE:_ CSR is mixin for basic usage, it is used to set background image url, position, repeat and size properties for background image. All other properties (like width or height) you have to set on your own (directly in styles or your helper mixin).
+
+### Advanced usage
+
+@TODO
