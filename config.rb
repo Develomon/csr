@@ -6,8 +6,6 @@
 ## file for more information.
 ##
 
-# Test.
-
 # Default to development if environment is not set.
 saved = environment
 if (environment.nil?)
