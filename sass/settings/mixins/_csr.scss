@@ -81,8 +81,8 @@
 
   // Retina size.
   @if ($csr-retina-coefficient > 1) {
-    $csr-width: image-width(sprite-path($csr-map)) / $csr-retina-coefficient;
-    $csr-height: image-height(sprite-path($csr-map)) / $csr-retina-coefficient;
+    $csr-width: round(image-width(sprite-path($csr-map)) / $csr-retina-coefficient);
+    $csr-height: round(image-height(sprite-path($csr-map)) / $csr-retina-coefficient);
   }
 
   // Change default value 'auto' into real numbers.
@@ -125,7 +125,13 @@
     retina-suffix: '-2x',
     retina-coefficient: 2,
     offset-x: 0,
-    offset-y: 0
+    offset-y: 0,
+    settings: (
+      print-background-image: true,
+      print-background-position: true,
+      print-background-repeat: true,
+      print-background-size: true
+    )
   );
 
   // Merge default options and options in one object.
@@ -141,21 +147,48 @@
   $csr-name-retina: #{$csr-name}#{$csr-retina-suffix};
   $csr-offset-x:           map-get($array, offset-x);
   $csr-offset-y:           map-get($array, offset-y);
+  // Settings.
+  $csr-settings:           map_get($array, settings);
+  $settings-print-background-image:    map_get($csr-settings, print-background-image);
+  $settings-print-background-position: map_get($csr-settings, print-background-position);
+  $settings-print-background-repeat:   map_get($csr-settings, print-background-repeat);
+  $settings-print-background-size:     map_get($csr-settings, print-background-size);
 
+  //
   // Styles.
-  background-image: sprite-url($csr-map);
-  background-position: csr-background-position($csr-map, $csr-name, $csr-offset-x, $csr-offset-y);
-  background-repeat: no-repeat;
-  background-size: csr-background-size($csr-map); // Default: 'auto'.
+  //
+
+  // Background image.
+  @if $settings-print-background-image {
+    background-image: sprite-url($csr-map);
+  }
+  // Background position.
+  @if $settings-print-background-position {
+    background-position: csr-background-position($csr-map, $csr-name, $csr-offset-x, $csr-offset-y);
+  }
+  // Background repeat.
+  @if $settings-print-background-repeat {
+    background-repeat: no-repeat;
+  }
+  // Background size.
+  @if $settings-print-background-size {
+    background-size: csr-background-size($csr-map); // Default: 'auto'.
+  }
 
   // Retina styles.
-  @if $csr-retina {
+  @if $csr-retina and ($settings-print-background-position or $settings-print-background-size) {
     @media (-webkit-min-device-pixel-ratio: 2),
     (-o-min-device-pixel-ratio: 3/2),
     (min--moz-device-pixel-ratio: 2),
     (min-device-pixel-ratio: 2), (min-resolution: 144dppx) {
-      background-size: csr-background-size($csr-map, $csr-retina-coefficient);
-      background-position: csr-background-position($csr-map, $csr-name-retina, $csr-offset-x, $csr-offset-y, $csr-retina-coefficient);
+      // Background position.
+      @if $settings-print-background-position {
+        background-position: csr-background-position($csr-map, $csr-name-retina, $csr-offset-x, $csr-offset-y, $csr-retina-coefficient);
+      }
+      // Background size.
+      @if $settings-print-background-size {
+        background-size: csr-background-size($csr-map, $csr-retina-coefficient);
+      }
     }
   }
 }
