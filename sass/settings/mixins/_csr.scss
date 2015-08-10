@@ -4,9 +4,106 @@
 /// @author Dragan Eror
 ////
 
+//
+// -----------------------------------------------------------
+// Dependencies
+// -----------------------------------------------------------
+//
+
+@import "compass";
+
+//
+// -----------------------------------------------------------
+// Functions
+// -----------------------------------------------------------
+//
+
+///
+/// Calculate background position.
+/// @param {Object} $sprite-map - Sprite object variable.
+/// @param {String} $name - Icon file name.
+/// @param {Integer} $offset-x - Horizontal distance.
+/// @param {Integer} $offset-y - Vertical distance.
+/// @param {Integer} $retina-coefficient - Number for retina calculation.
+/// @return {String} - Returns icon position in sprite.
+/// @example
+///   .selector {
+///     background-position: csr-background-position($map, $name, $offset-x, $offset-y, 2);
+///   }
+///
+@function csr-background-position($map, $name, $offset-x, $offset-y, $retina-coefficient: 1) {
+  // Local variables.
+  $csr-map: $map;
+  $csr-name: $name;
+  $csr-offset-x: $offset-x;
+  $csr-offset-y: $offset-y;
+  $csr-retina-coefficient: $retina-coefficient;
+
+  // Retina offset.
+  @if ($csr-retina-coefficient > 1) {
+    $csr-offset-x: $offset-x * $csr-retina-coefficient;
+    $csr-offset-y: $offset-y * $csr-retina-coefficient;
+  }
+
+  $sprite-position: sprite-position($csr-map, $csr-name, $csr-offset-x, $csr-offset-y);
+  $sprite-position-x: nth($sprite-position, 1);
+  $sprite-position-y: nth($sprite-position, 2);
+
+  // Retina position.
+  @if ($csr-retina-coefficient > 1) {
+    $sprite-position-x: round(nth($sprite-position, 1) / $csr-retina-coefficient);
+    $sprite-position-y: round(nth($sprite-position, 2) / $csr-retina-coefficient);
+  }
+
+  @return $sprite-position-x $sprite-position-y;
+}
+
+///
+/// Calculate background size.
+/// @param {Object} $sprite-map - Sprite object variable.
+/// @param {Integer} $retina-coefficient - Number for retina calculation.
+/// @return {String} - Returns icon sprite size.
+/// @example
+///   .selector {
+///     background-size: csr-background-size($map, $retina-coefficient);
+///   }
+///   .selector-2 {
+///     background-size: csr-background-size($map, 3);
+///   }
+///
+@function csr-background-size($map, $retina-coefficient: 1) {
+  // Local variables.
+  $csr-map: $map;
+  $csr-retina-coefficient: $retina-coefficient;
+  $csr-width: 0;
+  $csr-height: 0;
+  $csr-background-size: auto;
+
+  // Retina size.
+  @if ($csr-retina-coefficient > 1) {
+    $csr-width: image-width(sprite-path($csr-map)) / $csr-retina-coefficient;
+    $csr-height: image-height(sprite-path($csr-map)) / $csr-retina-coefficient;
+  }
+
+  // Change default value 'auto' into real numbers.
+  @if ($csr-retina-coefficient > 1 and $csr-width > 0 and $csr-height > 0) {
+    $csr-background-size: $csr-width $csr-height;
+  }
+
+  @return $csr-background-size;
+}
+
+//
+// -----------------------------------------------------------
+// Mixins
+// -----------------------------------------------------------
+//
+
 ///
 /// Compass sprites retina.
 /// @param {Object} $options [()] - Mixin options object.
+/// @require {function} csr-background-size
+/// @require {function} csr-background-position
 /// @example
 ///   $options: (
 ///     map: '',
@@ -26,6 +123,7 @@
     name: '',
     retina: true,
     retina-suffix: '-2x',
+    retina-coefficient: 2,
     offset-x: 0,
     offset-y: 0
   );
@@ -35,19 +133,20 @@
   $array: map_merge($default-options, $options);
 
   // Local variables.
-  $csr-map:             map-get($array, map);
-  $csr-retina:          map-get($array, retina);
-  $csr-retina-suffix:   map-get($array, retina-suffix);
-  $csr-name:            map-get($array, name);
+  $csr-map:                map-get($array, map);
+  $csr-retina:             map-get($array, retina);
+  $csr-retina-suffix:      map-get($array, retina-suffix);
+  $csr-retina-coefficient: map-get($array, retina-coefficient);
+  $csr-name:               map-get($array, name);
   $csr-name-retina: #{$csr-name}#{$csr-retina-suffix};
-  $csr-offset-x:        map-get($array, offset-x);
-  $csr-offset-y:        map-get($array, offset-y);
+  $csr-offset-x:           map-get($array, offset-x);
+  $csr-offset-y:           map-get($array, offset-y);
 
   // Styles.
   background-image: sprite-url($csr-map);
-  background-position: sprite-position($csr-map, $csr-name, $csr-offset-x, $csr-offset-y);
+  background-position: csr-background-position($csr-map, $csr-name, $csr-offset-x, $csr-offset-y);
   background-repeat: no-repeat;
-  background-size: auto;
+  background-size: csr-background-size($csr-map); // Default: 'auto'.
 
   // Retina styles.
   @if $csr-retina {
@@ -55,8 +154,8 @@
     (-o-min-device-pixel-ratio: 3/2),
     (min--moz-device-pixel-ratio: 2),
     (min-device-pixel-ratio: 2), (min-resolution: 144dppx) {
-      background-size: (image-width(sprite-path($csr-map)) / 2) (image-height(sprite-path($csr-map)) / 2);
-      background-position: round(nth(sprite-position($csr-map, $csr-name-retina, ($csr-offset-x * 2), ($csr-offset-y * 2)), 1) / 2) round(nth(sprite-position($csr-map, $csr-name-retina, ($csr-offset-x * 2), ($csr-offset-y * 2)), 2) / 2);
+      background-size: csr-background-size($csr-map, $csr-retina-coefficient);
+      background-position: csr-background-position($csr-map, $csr-name-retina, $csr-offset-x, $csr-offset-y, $csr-retina-coefficient);
     }
   }
 }
@@ -66,6 +165,7 @@
 /// @param {Object} $map - Map object variable.
 /// @param {String} $file-name - Icon file name.
 /// @param {Object} $options [()] - Optional parameters.
+/// @require {mixin} csr
 /// @see {mixin} csr
 ///
 @mixin csr-base($map, $file-name, $options: ()) {
